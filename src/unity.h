@@ -9,8 +9,8 @@
 #define UNITY
 
 #define UNITY_VERSION_MAJOR    2
-#define UNITY_VERSION_MINOR    5
-#define UNITY_VERSION_BUILD    4
+#define UNITY_VERSION_MINOR    6
+#define UNITY_VERSION_BUILD    0
 #define UNITY_VERSION          ((UNITY_VERSION_MAJOR << 16) | (UNITY_VERSION_MINOR << 8) | UNITY_VERSION_BUILD)
 
 #ifdef __cplusplus
@@ -105,7 +105,7 @@ void verifyTest(void);
 #define TEST_MESSAGE(message)                                                                      UnityMessage((message), __LINE__)
 #define TEST_ONLY()
 #ifdef UNITY_INCLUDE_PRINT_FORMATTED
-#define TEST_PRINTF(message, ...)                                                                  UnityPrintF(__LINE__, (message), __VA_ARGS__)
+#define TEST_PRINTF(message, ...)                                                                  UnityPrintF(__LINE__, (message), ##__VA_ARGS__)
 #endif
 
 /* It is not necessary for you to call PASS. A PASS condition is assumed if nothing fails.
@@ -113,9 +113,19 @@ void verifyTest(void);
 #define TEST_PASS()                                                                                TEST_ABORT()
 #define TEST_PASS_MESSAGE(message)                                                                 do { UnityMessage((message), __LINE__); TEST_ABORT(); } while (0)
 
-/* This macro does nothing, but it is useful for build tools (like Ceedling) to make use of this to figure out
- * which files should be linked to in order to perform a test. Use it like TEST_FILE("sandwiches.c") */
-#define TEST_FILE(a)
+/*-------------------------------------------------------
+ * Build Directives
+ *-------------------------------------------------------
+
+ * These macros do nothing, but they are useful for additional build context.
+ * Tools (like Ceedling) can scan for these directives and make use of them for 
+ * per-test-executable #include search paths and linking. */
+
+/* Add source files to a test executable's compilation and linking. Ex: TEST_SOURCE_FILE("sandwiches.c") */
+#define TEST_SOURCE_FILE(a)
+
+/* Customize #include search paths for a test executable's compilation. Ex: TEST_INCLUDE_PATH("src/module_a/inc") */
+#define TEST_INCLUDE_PATH(a)
 
 /*-------------------------------------------------------
  * Test Asserts (simple)
