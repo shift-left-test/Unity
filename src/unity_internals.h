@@ -297,7 +297,7 @@ typedef UNITY_FLOAT_TYPE UNITY_FLOAT;
 #ifndef UNITY_OUTPUT_CHAR
   /* Default to using putchar, which is defined in stdio.h */
   #include <stdio.h>
-  #define UNITY_OUTPUT_CHAR(a) (void)putchar(a)
+  #define UNITY_OUTPUT_CHAR(a) do { (void)putchar(a); if (Unity.CurrentReportMessage) { writeChar(a); } } while (0)
 #else
   /* If defined as something else, make sure we declare it here so it's ready for use */
   #ifdef UNITY_OUTPUT_CHAR_HEADER_DECLARATION
@@ -510,6 +510,7 @@ struct UNITY_STORAGE_T
 #ifndef UNITY_EXCLUDE_SETJMP_H
     jmp_buf AbortFrame;
 #endif
+    UNITY_COUNTER_TYPE CurrentReportMessage;
 };
 
 extern struct UNITY_STORAGE_T Unity;

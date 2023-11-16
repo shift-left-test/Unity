@@ -17,3 +17,11 @@ Makefile
 CMakeFiles
 CMakeCache.txt
 !unityConfig.cmake
+*.xml
+*.html
+*.gcno
+*.gcda
+*.css
+*.out
+__pycache__/
+.cache/

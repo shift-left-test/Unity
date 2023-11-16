@@ -16,6 +16,14 @@ If you're new to Unity, we encourage you to tour the [getting started guide][].
 
 The [docs][] folder contains a [getting started guide][] and much more tips about using Unity.
 
+## JUnit XML report
+
+To create an XML report file, you need to define the `UNITY_OUTPUT_XML_FILE` macro. This can be done by adding the following line to a custom `unity_config.h` file:
+
+    #define UNITY_OUTPUT_XML_FILE "path/to/report.xml"
+
+Replace "path/to/report.xml" with the desired file path and name for the XML report file.
+
 ## Unity Assertion Summary
 
 For the full list, see [UnityAssertionsReference.md][].

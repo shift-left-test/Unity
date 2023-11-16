@@ -1,0 +1,22 @@
+pipeline {
+    agent { docker { image "cart.lge.com/swte/ubuntu-dev:latest" } }
+    stages {
+        stage('Test') {
+            steps {
+                dir("unittest") {
+                    sh "python3 -m pytest --tb=long -xvv --junitxml unittest.xml"
+                }
+            }
+        }
+        stage('Report') {
+            steps {
+                junit 'unittest/unittest.xml'
+            }
+        }
+    }  // stages
+    post {
+        always {
+            cleanWs()
+        }
+    }  // post
+}  // pipeline
