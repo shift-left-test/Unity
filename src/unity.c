@@ -13,7 +13,7 @@
 static int reportFileDescriptor;
 
 static void openXmlFile() {
-  reportFileDescriptor = open(UNITY_OUTPUT_XML_FILE, O_WRONLY | O_APPEND | O_CREAT | O_TRUNC, 0644);
+  reportFileDescriptor = open(UNITY_OUTPUT_XML_FILE, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 }
 
 static void closeXmlFile() {
